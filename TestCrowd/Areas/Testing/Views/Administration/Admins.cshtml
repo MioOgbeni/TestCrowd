@@ -1,0 +1,164 @@
+﻿@using TestCrowd.DataAccess.Model
+@model IList<Admin>
+
+@{
+    ViewBag.Title = "Admins";
+}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Admins</h1>
+    <p class="mb-4">Here you can view and manage your system admins.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body border-bottom-primary">
+            <a href="@Url.Action("Create")" class="btn btn-primary" id="addButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+            </a>
+            <a href="#" class="btn btn-primary" id="editButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-pen"></i>
+                </span>
+            </a>
+            <button href="#" class="btn btn-danger" id="deleteButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
+            </button>
+        </div>
+
+        @if (TempData["error"] != null)
+        {
+            <br />
+            <div class=" alert card border-bottom-danger shadow h-50 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (TempData["success"] != null)
+        {
+            <br />
+            <div class=" alert card border-bottom-success shadow h-50 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Success</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["success"]</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-circle fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        if (!$.fn.DataTable.isDataTable('#dataTable')) {
+            var selected = [];
+            var table = $('#dataTable').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: {
+                    url: "@Url.Action("AdminsDataTable")",
+                    type: 'POST'
+                },
+                language: {
+                    search: "",
+                    searchPlaceholder: "Search by Email..."
+                },
+                columns: [
+                    {
+                        name: "UserName",
+                        data: "userName",
+                        title: "UserName",
+                        sortable: true,
+                        searchable: false
+                    },
+                    {
+                        name: "Email",
+                        data: "email",
+                        title: "Email",
+                        sortable: true,
+                        searchable: true
+                    },
+                    {
+                        name: "FirstName",
+                        data: "firstName",
+                        title: "First Name",
+                        sortable: true,
+                        searchable: false
+                    },
+                    {
+                        name: "LastName",
+                        data: "lastName",
+                        title: "Last Name",
+                        sortable: true,
+                        searchable: false
+                    }
+                ],
+                rowCallback: function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }
+            });
+
+            $('#dataTable tbody').on('click', 'tr', function () {
+                var id = this.id;
+                var index = $.inArray(id, selected);
+
+                if ( index === -1 ) {
+                    selected.push( id );
+                } else {
+                    selected.splice( index, 1 );
+                }
+
+                $(this).toggleClass('selected');
+            });
+
+            $('#deleteButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        var object = table.rows('.selected').data().toArray();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("Delete")",
+                            data: { rows: object }
+                        });
+                        window.setTimeout(function () { window.location.reload(); }, 300);
+                    }
+                });
+
+            $('#editButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        var object = table.rows('.selected').data().toArray();
+                        var url = "@Url.Action("Edit")" + "?id=" + object[0].id;
+                        window.setTimeout(function () { window.location.href = url; }, 300);
+                    }
+                });
+        }
+    });
+</script>

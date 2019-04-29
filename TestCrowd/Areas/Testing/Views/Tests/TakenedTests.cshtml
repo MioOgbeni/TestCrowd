@@ -1,0 +1,221 @@
+﻿@using TestCrowd.DataAccess.Model.Tests
+@model IList<Tests>
+@{
+    ViewBag.Title = "Takened Tests";
+}
+
+<div class="container-fluid">
+
+    <div class="row mb-4">
+        <div class="col">
+            <div class="card py-2">
+                <div class="card-body pl-2 pt-1 pb-0">
+                    <div class="row pl-3">
+                        <div class="dropdown mb-1 mr-1">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @((ViewBag.SoftType != null) ? ViewBag.SoftType.Name : "Select software type")
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton1" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                @Ajax.ActionLink("All", "TakenedTests", new { page = ViewBag.CurrentPage, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "dropdown-item" })
+
+                                @foreach (SoftwareType softType in ViewBag.SoftTypes)
+                                {
+                                    @Ajax.ActionLink(softType.Name, "TakenedTests", new { page = ViewBag.CurrentPage, swTypeGuid = softType.Id, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "dropdown-item" })
+                                }
+                            </div>
+                        </div>
+                        <div class="dropdown mb-1 mr-1">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @((ViewBag.TestCategory != null) ? ViewBag.TestCategory.Name : "Select test category")
+                            </button>
+                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton2" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                @Ajax.ActionLink("All", "TakenedTests", new { page = ViewBag.CurrentPage, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "dropdown-item" })
+
+                                @foreach (TestCategory testCat in ViewBag.TestCategories)
+                                {
+                                    @Ajax.ActionLink(testCat.Name, "TakenedTests", new { page = ViewBag.CurrentPage, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = testCat.Id, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "dropdown-item" })
+                                }
+                            </div>
+                        </div>
+                        <div class="mb-1 mr-1 input-group pl-0 col-2">
+                            <input class="form-control form-control-user" id="SearchBox" name="SearchBox" placeholder="Search by name" type="text" autofocus value=@ViewBag.CurrentSearch>
+                            <div class="input-group-append" id="SearchButton">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @foreach (var testCase in Model)
+        {
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-bottom-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <p class="text-xl-center font-weight-bold text-primary text-uppercase mb-1 text-center">@testCase.Test.Name</p>
+                        <p class="text-xs mb-1 text-center">from company @testCase.Test.Creator.CompanyName</p>
+                        <br />
+                        <div class="row no-gutters mb-3">
+                            <div class="col-md-6">
+                                <div class="font-weight-bold text-primary">Skill difficulty:</div>
+                            </div>
+                            <div class="col-md-6">
+                                @{
+                                    for (var i = 0; i < testCase.Test.SkillDificulty; i++)
+                                    {
+                                        <span class="icon text-primary"><i class="fas fa-star"></i></span>
+                                    }
+                                    for (var i = 0; i < 5 - testCase.Test.SkillDificulty; i++)
+                                    {
+                                        <span class="icon text-primary"><i class="far fa-star"></i></span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="row no-gutters mb-3">
+                            <div class="col-md-6">
+                                <div class="font-weight-bold text-primary">Time difficulty:</div>
+                            </div>
+                            <div class="col-md-6">
+                                @{
+                                    for (var i = 0; i < testCase.Test.TimeDificulty; i++)
+                                    {
+                                        <span class="icon text-primary"><i class="fas fa-star"></i></span>
+                                    }
+                                    for (var i = 0; i < 5 - testCase.Test.TimeDificulty; i++)
+                                    {
+                                        <span class="icon text-primary"><i class="far fa-star"></i></span>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row no-gutters mb-3 ">
+                            <div class="col-md-6">
+                                <div class="font-weight-bold text-primary">Software type:</div>
+                            </div>
+                            <div class="col-md-6">
+                                @testCase.Test.SoftwareType.Name
+                            </div>
+                        </div>
+                        <div class="row no-gutters mb-3 ">
+                            <div class="col-md-6">
+                                <div class="font-weight-bold text-primary">Test category:</div>
+                            </div>
+                            <div class="col-md-6">
+                                @testCase.Test.Category.Name
+                            </div>
+                        </div>
+                        <div class="row no-gutters mb-3 ">
+                            <div class="col-md-6">
+                                <div class="font-weight-bold text-primary">Reward:</div>
+                            </div>
+                            <div class="col-md-6">
+                                @testCase.Test.Reward <span class="icon text-primary"><i class="fas fa-coins"></i></span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row no-gutters justify-content-center">
+                            @Html.ActionLink("Details", "TestDetails", new { testGuid = testCase.Test.Id }, new { @class = "btn btn-primary text-white text-uppercase mr-1" })
+                            @Html.ActionLink("Resolve test", "ResolveTest", new { testGuid = testCase.Test.Id }, new { @class = "btn btn-danger text-white text-uppercase" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    @if (Model.Count > 0)
+    {
+        <div class="row">
+            <div class="col d-flex justify-content-end mb-3">
+                @if (ViewBag.Pages != null)
+                {
+                    @Ajax.ActionLink("First", "TakenedTests", new { page = 1, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "btn btn-primary text-white text-uppercase mr-1" })
+                    for (int i = 1; i <= ViewBag.Pages; i++)
+                    {
+                        if (ViewBag.CurrentPage == 1)
+                        {
+                            if (i >= (ViewBag.CurrentPage) && i <= (ViewBag.CurrentPage + 2))
+                            {
+                                if (ViewBag.CurrentPage == i)
+                                {
+                                    @Ajax.ActionLink(i.ToString(), "TakenedTests", new { page = i, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "btn btn-primary border-primary text-white text-uppercase mr-1" })
+
+                                }
+                                else
+                                {
+                                    @Ajax.ActionLink(i.ToString(), "TakenedTests", new { page = i, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "btn btn-light border-primary text-primary text-uppercase mr-1" })
+
+                                }
+                            }
+                        }
+                        else if (ViewBag.CurrentPage == ViewBag.Pages)
+                        {
+                            if (i >= (ViewBag.CurrentPage - 2) && i <= (ViewBag.CurrentPage))
+                            {
+                                if (ViewBag.CurrentPage == i)
+                                {
+                                    @Ajax.ActionLink(i.ToString(), "TakenedTests", new { page = i, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "btn btn-primary border-primary text-white text-uppercase mr-1" })
+
+                                }
+                                else
+                                {
+                                    @Ajax.ActionLink(i.ToString(), "TakenedTests", new { page = i, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "btn btn-light border-primary text-primary text-uppercase mr-1" })
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (i >= (ViewBag.CurrentPage - 1) && i <= (ViewBag.CurrentPage + 1))
+                            {
+                                if (ViewBag.CurrentPage == i)
+                                {
+                                    @Ajax.ActionLink(i.ToString(), "TakenedTests", new { page = i, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "btn btn-primary border-primary text-white text-uppercase mr-1" })
+
+                                }
+                                else
+                                {
+                                    @Ajax.ActionLink(i.ToString(), "TakenedTests", new { page = i, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "btn btn-light border-primary text-primary text-uppercase mr-1" })
+
+                                }
+                            }
+                        }
+
+                    }
+                    @Ajax.ActionLink("Last", "TakenedTests", new { page = ViewBag.Pages, swTypeGuid = (ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null, testCatGuid = (ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null, searchTerm = ViewBag.CurrentSearch }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, UpdateTargetId = "dynamicContent" }, new { @class = "btn btn-primary text-white text-uppercase mr-1" })
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <p class="lead text-gray-800 mb-5"></p>
+            <p class="text-gray-500 mb-0">There's nothing to match your filtering...</p>
+        </div>
+    }
+
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#SearchButton').click(function() {
+            var searchTerm = document.getElementById("SearchBox").value;
+            $.ajax({
+                url: '@Url.Action("TakenedTests", "Tests")' ,
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                data: { 'page': @ViewBag.CurrentPage, 'swTypeGuid': '@((ViewBag.SoftType != null) ? ViewBag.SoftType.Id : null)', 'testCatGuid' : '@((ViewBag.TestCategory != null) ? ViewBag.TestCategory.Id : null)', 'searchTerm' : searchTerm}
+            }).done(function (partialViewResult) {
+                $("#dynamicContent").html(partialViewResult);
+            });
+        });
+    });
+</script>

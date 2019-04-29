@@ -1,0 +1,42 @@
+﻿@model TestCrowd.DataAccess.Model.Admin
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Profile info</h2>
+
+<div class="card-body card">
+    <div class="card-body">
+        <h4>Basic information</h4>
+        <div class="card border-left-primary mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-1-2">
+                        <p class="font-weight-bold text-primary">First Name: </p>
+                    </div>
+                    <div class="col">
+                        @Model.FirstName
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1-2">
+                        <p class="font-weight-bold text-primary">Last Name: </p>
+                    </div>
+                    <div class="col">
+                        @Model.LastName
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1-2">
+                        <p class="font-weight-bold text-primary">Email: </p>
+                    </div>
+                    <div class="col">
+                        @Model.Email
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

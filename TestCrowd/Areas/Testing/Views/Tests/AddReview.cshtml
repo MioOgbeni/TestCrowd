@@ -1,0 +1,71 @@
+﻿@model TestCrowd.DataAccess.Model.Reviews.Review
+@{
+    ViewBag.Title = "Add review";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Test case - @ViewBag.Title</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            @if (TempData["error"] != null)
+            {
+                <br />
+                <div class=" alert card border-left-danger shadow h-50 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @using (Html.BeginForm("CreateReview", "Tests", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input type="hidden" name="testsGuid" value="@ViewBag.TestsGuid"/>
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Rating:</p>
+                    <div class=" rating">
+                        @Html.RadioButtonFor(x => x.Rating, 5, new { @id = "skillstar5", @name = "rating" })
+                        @Html.Label("5 stars", new { @title = "text", @for = "skillstar5" })
+                        @Html.RadioButtonFor(x => x.Rating, 4, new { @id = "skillstar4", @name = "rating" })
+                        @Html.Label("4 stars", new { @title = "text", @for = "skillstar4" })
+                        @Html.RadioButtonFor(x => x.Rating, 3, new { @id = "skillstar3", @name = "rating" })
+                        @Html.Label("3 stars", new { @title = "text", @for = "skillstar3" })
+                        @Html.RadioButtonFor(x => x.Rating, 2, new { @id = "skillstar2", @name = "rating" })
+                        @Html.Label("2 stars", new { @title = "text", @for = "skillstar2" })
+                        @Html.RadioButtonFor(x => x.Rating, 1, new { @id = "skillstar1", @name = "rating" })
+                        @Html.Label("1 stars", new { @title = "text", @for = "skillstar1" })
+                    </div>
+                    <p class="small">@Html.ValidationMessageFor(x => x.Rating)</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-7 mb-3 mb-sm-0">
+                        <p class=" align-content-center">Description:</p>
+                        @Html.TextAreaFor(x => x.Content, new { @class = "form-control", rows = "6" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.Content)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 mb-3 mb-sm-0">
+                        <a href="@Url.Action("FinishedTests")" class="btn btn-primary btn-user btn-block">Back</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Publish review</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

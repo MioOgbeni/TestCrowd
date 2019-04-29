@@ -1,0 +1,176 @@
+﻿@model TestCrowd.DataAccess.Model.Tests.Tests
+@{
+    ViewBag.Title = "Resolve test";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">@ViewBag.Title</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <h4 class="text-primary">You resolving test case - <b><i>@Model.Test.Name</i></b></h4>
+            <a class="nav-link btn btn-primary dropdown-toggle mb-4 col-2" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-info"></i>
+                <span>Show test details</span>
+            </a>
+            <div id="collapseUtilities" class="card border-left-primary mb-4 collapse mt-n4">
+                <div class="card-body">
+                    <div class="row col-sm-6">
+                        <p class=" align-content-center font-weight-bold text-primary">Skill difficulty:</p>
+                        <div class="ratingDetail">
+                            @Html.RadioButtonFor(x => x.Test.SkillDificulty, 5, new { @id = "skillstar5", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("5 stars", new { @title = "text", @for = "skillstar5" })
+                            @Html.RadioButtonFor(x => x.Test.SkillDificulty, 4, new { @id = "skillstar4", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("4 stars", new { @title = "text", @for = "skillstar4" })
+                            @Html.RadioButtonFor(x => x.Test.SkillDificulty, 3, new { @id = "skillstar3", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("3 stars", new { @title = "text", @for = "skillstar3" })
+                            @Html.RadioButtonFor(x => x.Test.SkillDificulty, 2, new { @id = "skillstar2", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("2 stars", new { @title = "text", @for = "skillstar2" })
+                            @Html.RadioButtonFor(x => x.Test.SkillDificulty, 1, new { @id = "skillstar1", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("1 stars", new { @title = "text", @for = "skillstar1" })
+                        </div>
+                    </div>
+
+                    <div class="row col-sm-6">
+                        <p class=" align-content-center font-weight-bold text-primary">Time difficulty:</p>
+                        <div class="ratingDetail">
+                            @Html.Label("5 stars", new { @title = "text", @for = "timestar5" })
+                            @Html.RadioButtonFor(x => x.Test.TimeDificulty, 4, new { @id = "timestar4", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("4 stars", new { @title = "text", @for = "timestar4" })
+                            @Html.RadioButtonFor(x => x.Test.TimeDificulty, 3, new { @id = "timestar3", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("3 stars", new { @title = "text", @for = "timestar3" })
+                            @Html.RadioButtonFor(x => x.Test.TimeDificulty, 2, new { @id = "timestar2", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("2 stars", new { @title = "text", @for = "timestar2" })
+                            @Html.RadioButtonFor(x => x.Test.TimeDificulty, 1, new { @id = "timestar1", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("1 stars", new { @title = "text", @for = "timestar1" })
+                        </div>
+                    </div>
+
+                    <div class="row ml-1">
+                        <p class=" align-content-center font-weight-bold text-primary">Software Type:&nbsp;</p> @Model.Test.SoftwareType.Name
+                    </div>
+                    <div class="row ml-1">
+                        <p class=" align-content-center font-weight-bold text-primary">Test Category:&nbsp;</p> @Model.Test.Category.Name
+                    </div>
+                    <hr />
+                    <div class="row ml-1">
+                        <p class=" align-content-center font-weight-bold text-primary">Avilable to:&nbsp;</p> @Model.Test.AvailableTo.ToShortDateString()
+                    </div>
+                    <div class="row ml-1">
+                        <p class=" align-content-center font-weight-bold text-primary">Reward:&nbsp;</p>@Model.Test.Reward &nbsp;<span class="icon text-primary"><i class="fas fa-coins"></i></span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-7 mb-3 mb-sm-0">
+                            @if (Model.Test.Evidences != null && Model.Test.Evidences.Count > 0)
+                            {
+                                <p class=" align-content-center">Attachments:</p>
+                                <table>
+                                    <tbody>
+                                        @foreach (var evidence in Model.Test.Evidences)
+                                        {
+                                            <tr class="border-left-primary border" id="detailTr">
+                                                <td>&nbsp&nbsp&nbsp</td>
+                                                <td border="1px" width="900" class="text-left">@evidence.RealName@evidence.Extension</td>
+                                                <td>&nbsp&nbsp&nbsp</td>
+                                                <td border="1px" class="text-center">@evidence.Attached.ToShortDateString()</td>
+                                                <td>&nbsp&nbsp&nbsp</td>
+                                                <td border="1px" class="text-center">
+                                                    <a href="@Path.Combine("/Uploads", evidence.Name + evidence.Extension)" class="btn btn-primary btn-user btn-block" download="@evidence.RealName@evidence.Extension">
+                                                        <span class="icon text-white-50">
+                                                            <i class="fas fa-download"></i>
+                                                        </span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                    </div>
+                    <br />
+                    <div class=" row">
+                        <div class="col-sm-7 mb-3 mb-sm-0">
+                            <p class=" align-content-center">Description:</p>
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <p>
+                                        @Html.Raw(Model.Test.Description)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (TempData["error"] != null)
+            {
+                <br />
+                <div class=" alert card border-left-danger shadow h-50 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @using (Html.BeginForm("Resolve", "Tests", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(x => x.Id)
+
+                <div class="form-group row">
+                    <div class="col-sm-2">
+                        <p class=" align-content-center">Test status:</p>
+                        @Html.DropDownListFor(x => x.TestStatus.Id, new SelectList(ViewBag.TestStatus, "Id", "Status"), "Select test condition", new { @class = "form-control form-control-user" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.TestStatus)</p>
+                    </div>
+                </div>
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Evidence files:</p>
+                    <div class="form-group col-sm-3">
+                        <input type="file" multiple="multiple" id="files" name="files" visbility="hidden" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 mb-3 mb-sm-0">
+                        <a href="@Url.Action("TakenedTests")" class="btn btn-primary btn-user btn-block">Back</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Resolve test</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        var uploadField = document.getElementById("files");
+        var maxSizeInMb = 20;
+        var byte = 1048576;
+        var maxSizeInBytes = byte * maxSizeInMb;
+        uploadField.onchange = function() {
+            for (var x in this.files) {
+                if (this.files[x].size > maxSizeInBytes){
+                    alert("File " + this.files[x].name + " is too big! (max size is " + maxSizeInMb +"MB");
+                    this.value = "";
+                };
+            }
+        };
+    });
+</script>

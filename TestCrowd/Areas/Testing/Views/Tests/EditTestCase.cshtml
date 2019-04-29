@@ -1,0 +1,180 @@
+﻿@model TestCrowd.DataAccess.Model.Tests.TestCase
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Test case - @ViewBag.Title</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            @if (TempData["error"] != null)
+            {
+                <br />
+                <div class=" alert card border-left-danger shadow h-50 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @using (Html.BeginForm("UpdateTestCase", "Tests", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(x => x.Id)
+
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control form-control-user", @placeholder = "Test name" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.Name)</p>
+                    </div>
+                </div>
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Select skill difficulty:</p>
+                    <div class=" rating">
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 5, new { @id = "skillstar5", @name = "rating" })
+                        @Html.Label("5 stars", new { @title = "text", @for = "skillstar5" })
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 4, new { @id = "skillstar4", @name = "rating" })
+                        @Html.Label("4 stars", new { @title = "text", @for = "skillstar4" })
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 3, new { @id = "skillstar3", @name = "rating" })
+                        @Html.Label("3 stars", new { @title = "text", @for = "skillstar3" })
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 2, new { @id = "skillstar2", @name = "rating" })
+                        @Html.Label("2 stars", new { @title = "text", @for = "skillstar2" })
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 1, new { @id = "skillstar1", @name = "rating" })
+                        @Html.Label("1 stars", new { @title = "text", @for = "skillstar1" })
+                    </div>
+                    <p class="small">@Html.ValidationMessageFor(x => x.SkillDificulty)</p>
+                </div>
+
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Select time difficulty:</p>
+                    <div class=" rating">
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 5, new { @id = "timestar5", @name = "rating" })
+                        @Html.Label("5 stars", new { @title = "text", @for = "timestar5" })
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 4, new { @id = "timestar4", @name = "rating" })
+                        @Html.Label("4 stars", new { @title = "text", @for = "timestar4" })
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 3, new { @id = "timestar3", @name = "rating" })
+                        @Html.Label("3 stars", new { @title = "text", @for = "timestar3" })
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 2, new { @id = "timestar2", @name = "rating" })
+                        @Html.Label("2 stars", new { @title = "text", @for = "timestar2" })
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 1, new { @id = "timestar1", @name = "rating" })
+                        @Html.Label("1 stars", new { @title = "text", @for = "timestar1" })
+                    </div>
+                    <p class="small">@Html.ValidationMessageFor(x => x.TimeDificulty)</p>
+                </div>
+
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Available to:</p>
+                    <div class="form-group col-sm-4">
+                        @Html.TextBoxFor(x => x.AvailableTo, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.AvailableTo)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 mb-3 mb-sm-0">
+                        <p class=" align-content-center">Reward:</p>
+                        @Html.TextBoxFor(x => x.Reward, new { @class = "form-control form-control-user", @placeholder = "Reward" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.Reward)</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class=" align-content-center">Software Type:</p>
+                        @Html.DropDownListFor(x => x.SoftwareType.Id, new SelectList(ViewBag.SoftwareTypes, "Id", "Name"), "Select software type", new { @class = "form-control form-control-user" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.SoftwareType)</p>
+                    </div>
+                    <div class="col-sm-2">
+                        <p class=" align-content-center">Test Category:</p>
+                        @Html.DropDownListFor(x => x.Category.Id, new SelectList(ViewBag.TestCategories, "Id", "Name"), "Select test category", new { @class = "form-control form-control-user" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.Category)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-7 mb-3 mb-sm-0">
+                        @if (Model.Evidences != null && Model.Evidences.Count > 0)
+                        {
+                            <p class=" align-content-center">Attachments:</p>
+                            <table>
+                                <tbody>
+                                <tr class="">
+                                    <th>Name</th>
+                                    <td>&nbsp&nbsp&nbsp</td>
+                                    <th>Created</th>
+                                    <td>&nbsp&nbsp&nbsp</td>
+                                    <td>&nbsp&nbsp&nbsp</td>
+                                </tr>
+                                @foreach (var evidence in Model.Evidences)
+                                {
+                                    <tr class="">
+                                        <td border="1px" width="700" class="text-left">@evidence.RealName@evidence.Extension</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" class="text-center">@evidence.Attached.ToShortDateString()</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" class="text-center">
+                                            <a href="@Url.Action("DeleteAttachment", new {id = Model.Id, attachment = evidence.Id})" class="btn btn-primary btn-user btn-block">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-times"></i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+
+                </div>
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Additional files:</p>
+                    <div class="form-group col-sm-3">
+                        <input type="file" multiple="multiple" id="files" name="files" visbility="hidden" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-7 mb-3 mb-sm-0">
+                        <p class=" align-content-center">Description:</p>
+                        @Html.TextAreaFor(x => x.Description, new { @class = "form-control", rows = "6" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.Description)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 mb-3 mb-sm-0">
+                        <a href="@Url.Action("CompanyTests")" class="btn btn-primary btn-user btn-block">Back</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Edit test case</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        var uploadField = document.getElementById("files");
+        var maxSizeInMb = 20;
+        var byte = 1048576;
+        var maxSizeInBytes = byte * maxSizeInMb;
+        uploadField.onchange = function() {
+            for (var x in this.files) {
+                if (this.files[x].size > maxSizeInBytes){
+                    alert("File " + this.files[x].name + " is too big! (max size is " + maxSizeInMb +"MB");
+                    this.value = "";
+                };
+            }
+        };
+    });
+</script>

@@ -1,0 +1,308 @@
+﻿@using System.Activities.Statements
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard</h2>
+
+
+@if (ViewBag.Role == "company")
+{
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-success text-uppercase mb-1">Your credits</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.Credits</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-success"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("Index", "Payment" )" class="col mr-2 btn btn-success">
+                            <span class="text">Deposit more here!</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-warning text-uppercase mb-1">Your tests</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.Tests</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-file fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("CompanyTests", "Tests" )" class="col mr-2 btn btn-warning">
+                            <span class="text">Go to your tests</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-warning text-uppercase mb-1">Your test groups</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.TestGroups</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-copy fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("CompanyTestGroups", "TestGroups" )" class="col mr-2 btn btn-warning">
+                            <span class="text">Go to your test groups</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-danger text-uppercase mb-1">Your disputes</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.Disputes</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-angry fa-2x text-danger"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="#" class="col mr-2 btn btn-danger">
+                            <span class="text">Go to your disputes</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (ViewBag.Role == "tester")
+{
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-success text-uppercase mb-1">Your credits</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.Credits</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-success"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("Index", "Payment" )" class="col mr-2 btn btn-success">
+                            <span class="text">Withdraw here!</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-primary text-uppercase mb-1">Takened tests</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.TakenedTests</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-bug fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("TesterTests", "Tests" )" class="col mr-2 btn btn-primary">
+                            <span class="text">Take your test now!</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-warning text-uppercase mb-1">Resolved tests</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.ResolvedTests</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-check fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("FinishedTests", "Tests" )" class="col mr-2 btn btn-warning">
+                            <span class="text">Go to your takened tests</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-danger text-uppercase mb-1">Your disputes</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.Disputes</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-angry fa-2x text-danger"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="#" class="col mr-2 btn btn-danger">
+                            <span class="text">Go to your disputes</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (ViewBag.Role == "admin")
+{
+    <br />
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <h4>Disputes</h4>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-primary text-uppercase mb-1">Panding disputes</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.Disputes</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-angry fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-warning text-uppercase mb-1">Your in progress disputes</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.InProgressDisputes</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-meh fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-success text-uppercase mb-1">Your resolved disputes</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.ResolvedDisputes</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-smile fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <h4>Administration</h4>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-primary text-uppercase mb-1">Admins in system</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.Admins</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("Admins", "Administration")" class="col mr-2 btn btn-primary">
+                            <span class="text">Go admins list</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-primary text-uppercase mb-1">Software types</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.SoftwareTypes</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-atlas fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("SoftwareTypes", "Administration")" class="col mr-2 btn btn-primary">
+                            <span class="text">Go to software types</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center mb-2">
+                        <div class="col mr-2">
+                            <div class="text font-weight-bold text-primary text-uppercase mb-1">Test categories</div>
+                            <div class="h3 mb-0 font-weight-bold text-gray-800">@ViewBag.TestCategories</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-sitemap fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                        <a href="@Url.Action("TestCategories", "Administration")" class="col mr-2 btn btn-primary">
+                            <span class="text">Go to test categories</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

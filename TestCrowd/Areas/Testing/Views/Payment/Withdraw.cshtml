@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Withdraw";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Credits - @ViewBag.Title</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="card border-left-primary mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-1-2">
+                            <p class="font-weight-bold text-primary">Available credits: </p>
+                        </div>
+                        <div class="col">
+                            @ViewBag.Credits <span class="icon text-primary"><i class="fas fa-coins"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (TempData["error"] != null)
+            {
+                <div class=" alert card border-left-danger shadow h-50 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            }
+            else if (TempData["success"] != null)
+            {
+                <div class=" alert card border-left-success shadow h-50 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Success</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["success"]</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-check-circle fa-2x text-success"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+            }
+            @using (Html.BeginForm("PayoutWithPaypal", "Payment", FormMethod.Get))
+            {
+                <div class="form-group row ml-1">
+                    <input class="form-control form-control-user col-2" placeholder="Enter number of credits" type="number" min="100" max="1000000" step="10" name="credits">
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Withdraw credits</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

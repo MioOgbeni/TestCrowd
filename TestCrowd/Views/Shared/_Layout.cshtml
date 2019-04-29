@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>@ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="@Url.Content("~/NewBiz/img/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Content("~/NewBiz/img/favicon-32x32.png")">
+    <link rel="icon" type="image/png" sizes="16x16" href="@Url.Content("~/NewBiz/img/favicon-16x16.png")">
+    <link rel="manifest" href="@Url.Content("~/NewBiz/img/site.webmanifest")">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap CSS File -->
+    <link href="@Url.Content("~/NewBiz/lib/bootstrap/css/bootstrap.min.css")" rel="stylesheet">
+
+    <!-- Libraries CSS Files -->
+    <link href="@Url.Content("~/NewBiz/lib/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/NewBiz/lib/animate/animate.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/NewBiz/lib/ionicons/css/ionicons.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/NewBiz/lib/owlcarousel/assets/owl.carousel.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/NewBiz/lib/lightbox/css/lightbox.min.css")" rel="stylesheet">
+
+    <!-- Main Stylesheet File -->
+    <link href="@Url.Content("~/NewBiz/css/style.css")" rel="stylesheet">
+
+    <!-- =======================================================
+      Theme Name: NewBiz
+      Theme URL: https://bootstrapmade.com/newbiz-bootstrap-business-template/
+      Author: BootstrapMade.com
+      License: https://bootstrapmade.com/license/
+    ======================================================= -->
+</head>
+
+<body>
+
+    <!--==========================
+    Header
+    ============================-->
+    <header id="header" class="fixed-top">
+        <div class="container">
+
+            <div class="logo float-left">
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
+                <a href="#intro" class="scrollto"><img src="@Url.Content("~/NewBiz/img/logo-via-logohub.png")" alt="" class="img-fluid"></a>
+            </div>
+
+            <nav class="main-nav float-right d-none d-lg-block">
+                <ul>
+                    <li class="active"><a href="#intro">Home</a></li>
+                    <li><a href="#howItWorks">How it works</a></li>
+                    <li><a href="#weProvides">We provides</a></li>
+                    <li><a href="#startNow">Start Now</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="@Url.Action("Index", "Login")">Login</a></li>
+                </ul>
+            </nav><!-- .main-nav -->
+
+        </div>
+    </header><!-- #header -->
+    <!--==========================
+      Intro Section
+    ============================-->
+    <section id="intro" class="clearfix">
+        <div class="container">
+
+            <div class="intro-img">
+                <img src="@Url.Content("~/NewBiz/img/undraw_bug_fixing_oc7a.svg")" alt="" class="img-fluid">
+            </div>
+
+            <div class="intro-info">
+                <h2>Start testing<br>with people!</h2>
+                <div>
+                    <a href="#startNow" class="btn-get-started scrollto">Get Started</a>
+                    <a href="#howItWorks" class="btn-services scrollto">How it works</a>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- #intro -->
+
+    <main id="main">
+
+        <!--==========================
+          How it works Section
+        ============================-->
+        <section id="howItWorks">
+            <div class="container">
+
+                <header class="section-header">
+                    <h3>How it works?</h3>
+                    <p>Our services help improve software worldwide, now you can learn how it works.</p>
+                </header>             
+
+                <div class="row about-extra">
+                    <div class="col-lg-6 wow fadeInUp pt-5 pt-lg-0">
+                        <h4>Be a hero of debuging</h4>
+                        <p>
+                            Ipsum in aspernatur ut possimus sint. Quia omnis est occaecati possimus ea. Quas molestiae perspiciatis occaecati qui rerum. Deleniti quod porro sed quisquam saepe. Numquam mollitia recusandae non ad at et a.
+                        </p>
+                        <p>
+                            Ad vitae recusandae odit possimus. Quaerat cum ipsum corrupti. Odit qui asperiores ea corporis deserunt veritatis quidem expedita perferendis. Qui rerum eligendi ex doloribus quia sit. Porro rerum eum eum.
+                        </p>
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp">
+                        <img src="@Url.Content("~/NewBiz/img/undraw_super_woman_dv0y.svg")" class="img-fluid" alt="">
+                    </div>
+
+                </div>
+                
+                <div class="row about-container about-extra">
+                    
+                    <div class="col-lg-6 background order-lg-1 order-2 wow fadeInUp">
+                        <img src="@Url.Content("~/NewBiz/img/undraw_marketing_v0iu.svg")" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-6 content order-lg-2 order-1">
+                        <h4>Have everything under control</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+
+                        <div class="icon-box wow fadeInUp">
+                            <div class="icon"><i class="fa fa-bug"></i></div>
+                            <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
+                            <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                        </div>
+
+                        <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="icon"><i class="fa fa-list-alt"></i></div>
+                            <h4 class="title"><a href="">Magni Dolores</a></h4>
+                            <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        </div>
+
+                        <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="icon"><i class="fa fa-line-chart"></i></div>
+                            <h4 class="title"><a href="">Dolor Sitema</a></h4>
+                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="row about-extra">
+                    <div class="col-lg-6 wow fadeInUp order-1 order-lg-2">
+                        <img src="@Url.Content("~/NewBiz/img/undraw_checking_boxes_2ibd.svg")" class="img-fluid" alt="">
+                    </div>
+
+                    <div class="col-lg-6 wow fadeInUp pt-4 pt-lg-0 order-2 order-lg-1">
+                        <h4>Everyone can be satisfied</h4>
+                        <p>
+                            Delectus alias ut incidunt delectus nam placeat in consequatur. Sed cupiditate quia ea quis. Voluptas nemo qui aut distinctio. Cumque fugit earum est quam officiis numquam. Ducimus corporis autem at blanditiis beatae incidunt sunt.
+                        </p>
+                        <p>
+                            Voluptas saepe natus quidem blanditiis. Non sunt impedit voluptas mollitia beatae. Qui esse molestias. Laudantium libero nisi vitae debitis. Dolorem cupiditate est perferendis iusto.
+                        </p>
+                        <p>
+                            Eum quia in. Magni quas ipsum a. Quis ex voluptatem inventore sint quia modi. Numquam est aut fuga mollitia exercitationem nam accusantium provident quia.
+                        </p>
+                        @RenderBody()
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- #howItWorks -->
+        <!--==========================
+          We provides Section
+        ============================-->
+        <section id="weProvides" class="section-bg">
+            <div class="container">
+
+                <header class="section-header">
+                    <h3>We provides</h3>
+                    <p>We offer plenty of benefits for testers and companies. Learn more below.</p>
+                </header>
+                
+            <header class="section-header wow bounceInUp">
+                <h3>For testers</h3>
+            </header>
+            <div class="row">
+                  
+                    <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-duration="1.4s">
+                        <div class="box">
+                            <div class="icon"><i class="ion-happy-outline" style="color: #FFCC21;"></i></div>
+                            <h4 class="title"><a href="">Fun</a></h4>
+                            <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-duration="1.4s">
+                        <div class="box">
+                            <div class="icon"><i class="ion-thumbsup" style="color: #EA4335;"></i></div>
+                            <h4 class="title"><a href="">Practice in testing</a></h4>
+                            <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+                        <div class="box">
+                            <div class="icon"><i class="ion-card" style="color: #41cf2e;"></i></div>
+                            <h4 class="title"><a href="">Earning</a></h4>
+                            <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
+                        <div class="box">
+                            <div class="icon"><i class="ion-ios-world-outline" style="color: #4680ff;"></i></div>
+                            <h4 class="title"><a href="">Help companies</a></h4>
+                            <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                        </div>
+                    </div>
+            </div>   
+                    <header class="section-header wow bounceInUp">
+                        <h3>For companies</h3>
+                    </header>
+                    <div class="row">
+
+                        <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-duration="1.4s">
+                            <div class="box">
+                                <div class="icon"><i class="ion-bug" style="color: #EA4335;"></i></div>
+                                <h4 class="title"><a href="">Remove bugs</a></h4>
+                                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-duration="1.4s">
+                            <div class="box">
+                                <div class="icon"><i class="ion-ios-bookmarks-outline" style="color: #e9bf06;"></i></div>
+                                <h4 class="title"><a href="">Testing under control</a></h4>
+                                <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+                            <div class="box">
+                                <div class="icon"><i class="ion-card" style="color: #41cf2e;"></i></div>
+                                <h4 class="title"><a href="">Pay what you want</a></h4>
+                                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.1s" data-wow-duration="1.4s">
+                            <div class="box">
+                                <div class="icon"><i class="ion-ios-speedometer-outline" style="color:#3fcdc7;"></i></div>
+                                <h4 class="title"><a href="">Better performance</a></h4>
+                                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-5 offset-lg-1 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
+                            <div class="box">
+                                <div class="icon"><i class="ion-ios-world-outline" style="color: #4680ff;"></i></div>
+                                <h4 class="title"><a href="">Outsource your problems</a></h4>
+                                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5 wow bounceInUp" data-wow-delay="0.2s" data-wow-duration="1.4s">
+                            <div class="box">
+                                <div class="icon"><i class="ion-ios-clock-outline" style="color: #ccef2f;"></i></div>
+                                <h4 class="title"><a href="">Save your time</a></h4>
+                                <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+        </section><!-- #weProvides -->
+        <!--==========================
+          Start now Section
+        ============================-->
+        <section id="startNow" class="wow fadeIn">
+            <div class="container">
+                <header class="section-header">
+                    <h3>Get Started</h3>
+                    <p>Please sign up, before we start</p>
+                </header>
+
+                <div class="row row-eq-height justify-content-center">
+
+                    <div class="col-lg-4 mb-4">
+                        <div class="card wow bounceInUp">
+                            <i class="fa fa-user"></i>
+                            <div class="card-body">
+                                <h5 class="card-title">Testers</h5>
+                                <p class="card-text">Deleniti optio et nisi dolorem debitis. Aliquam nobis est temporibus sunt ab inventore officiis aut voluptatibus.</p>
+                                <a href="@Url.Action("Index", "Registration", new {id = "tester"})" id="button">Sign up</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 mb-4">
+                        <div class="card wow bounceInUp">
+                            <i class="fa fa-users"></i>
+                            <div class="card-body">
+                                <h5 class="card-title">Companies</h5>
+                                <p class="card-text">Voluptates nihil et quis omnis et eaque omnis sint aut. Ducimus dolorum aspernatur.</p>
+                                <a href="@Url.Action("Index", "Registration", new {id = "company"})" id="button">Sign up</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row counters " id="footer-row">
+
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">@ViewBag.Clients</span>
+                        <p>Clients</p>
+                    </div>
+
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">@ViewBag.Tests</span>
+                        <p>Tests</p>
+                    </div>
+
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">0</span>
+                        <p>Finded bugs</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!--==========================
+          Contact Section
+        ============================-->
+        <section id="contact">
+            <div class="container-fluid">
+
+                <div class="section-header">
+                    <h3>Contact Us</h3>
+                </div>
+
+                <div class="row wow fadeInUp">
+
+                    <div class="col-lg-6">
+                        <div class="map mb-4 mb-lg-0">
+                            <iframe src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJvWCuhzMrDEcRdkHUl1muZYM&key=AIzaSyAXMVBBzKkFAU0Fxl_G9PDLEviQWBrSLY8" frameborder="0" style="border:0; width: 100%; height: 312px;" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-md-5 info">
+                                <i class="ion-ios-location-outline"></i>
+                                <p>Hradecká 1249/6, 500 03 Hradec Králové</p>
+                            </div>
+                            <div class="col-md-4 info">
+                                <i class="ion-ios-email-outline"></i>
+                                <p>novakto3@uhk.cz</p>
+                            </div>
+                            <div class="col-md-3 info">
+                                <i class="ion-ios-telephone-outline"></i>
+                                <p>+420 605 070 685</p>
+                            </div>
+                        </div>
+
+                        <div class="form">
+                            <div id="sendmessage">Your message has been sent. Thank you!</div>
+                            <div id="errormessage"></div>
+                            <form action="" method="post" role="form" class="contactForm">
+                                <div class="form-row">
+                                    <div class="form-group col-lg-6">
+                                        <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                        <div class="validation"></div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                        <div class="validation"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                    <div class="validation"></div>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                                    <div class="validation"></div>
+                                </div>
+                                <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section><!-- #contact -->
+
+    </main>
+
+    <!--==========================
+      Footer
+    ============================-->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row" id="footer-row">
+
+                    <div class="col-lg-4 col-md-6 footer-info">
+                        <h3><a href="#intro" class="scrollto"><img src="@Url.Content("~/NewBiz/img/logo-via-logohub-white.png")" alt="" class="img-fluid" width="250"></a></h3>
+                        <p>TestCrowd is a crowd testing service. Testers can be rewarded for providing their time and sense of detail. And companies can save their time, money and human resources.</p>
+                    </div>
+
+                    <div class="col-lg-2 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li class="active"><a href="#intro">Home</a></li>
+                            <hr>
+                            <li><a href="#">Terms of service</a></li>
+                            <li><a href="#">Privacy policy</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h4>Contact Us</h4>
+                        <p>
+                            Hradecká 1249/6 <br>
+                            500 03 Hradec Králové <br>
+                            Czech Republic <br>
+                            <strong>Phone:</strong> <a id="aOnBlue" href="tel:+420605070685">+420 605 070 685</a><br>
+                            <strong>Email:</strong> <a id="aOnBlue"href="mailto:novakto3@uhk.cz">novakto3@uhk.cz</a><br>
+                        </p>
+
+                        <div class="social-links">
+                            <a href="https://twitter.com/TomasMioNovak" class="twitter"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/tomas.novak.5099" class="facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/mioogbeni/" class="instagram"><i class="fa fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/tom%C3%A1%C5%A1-nov%C3%A1k-0a37a8129/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="copyright">
+                &copy; Copyright <strong>TestCrowd</strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!--
+                  All the links in the footer should remain intact.
+                  You can delete the links only if you purchased the pro version.
+                  Licensing information: https://bootstrapmade.com/license/
+                  Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=NewBiz
+                -->
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+            </div>
+        </div>
+    </footer><!-- #footer -->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    <!-- Uncomment below i you want to use a preloader -->
+    <!-- <div id="preloader"></div> -->
+    <!-- JavaScript Libraries -->
+    <script src="@Url.Content("~/NewBiz/lib/jquery/jquery.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/jquery/jquery-migrate.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/easing/easing.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/mobile-nav/mobile-nav.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/wow/wow.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/waypoints/waypoints.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/counterup/counterup.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/owlcarousel/owl.carousel.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/isotope/isotope.pkgd.min.js")"></script>
+    <script src="@Url.Content("~/NewBiz/lib/lightbox/js/lightbox.min.js")"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="@Url.Content("~/NewBiz/contactform/contactform.js")"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="@Url.Content("~/NewBiz/js/main.js")"></script>
+
+</body>
+</html>

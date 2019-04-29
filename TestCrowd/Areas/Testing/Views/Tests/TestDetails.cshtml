@@ -1,0 +1,192 @@
+﻿@using TestCrowd.Class
+@using TestCrowd.DataAccess.Model.Tests
+@model TestCrowd.DataAccess.Model.Tests.TestCase
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">TestCase - @Model.Name</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="row col-sm-6">
+                <p class=" align-content-center font-weight-bold text-primary">Skill difficulty:</p>
+                <div class="ratingDetail">
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 5, new { @id = "skillstar5", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("5 stars", new { @title = "text", @for = "skillstar5" })
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 4, new { @id = "skillstar4", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("4 stars", new { @title = "text", @for = "skillstar4" })
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 3, new { @id = "skillstar3", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("3 stars", new { @title = "text", @for = "skillstar3" })
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 2, new { @id = "skillstar2", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("2 stars", new { @title = "text", @for = "skillstar2" })
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 1, new { @id = "skillstar1", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("1 stars", new { @title = "text", @for = "skillstar1" })
+                </div>
+            </div>
+
+            <div class="row col-sm-6">
+                <p class=" align-content-center font-weight-bold text-primary">Time difficulty:</p>
+                <div class="ratingDetail">
+                    @Html.Label("5 stars", new { @title = "text", @for = "timestar5" })
+                    @Html.RadioButtonFor(x => x.TimeDificulty, 4, new { @id = "timestar4", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("4 stars", new { @title = "text", @for = "timestar4" })
+                    @Html.RadioButtonFor(x => x.TimeDificulty, 3, new { @id = "timestar3", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("3 stars", new { @title = "text", @for = "timestar3" })
+                    @Html.RadioButtonFor(x => x.TimeDificulty, 2, new { @id = "timestar2", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("2 stars", new { @title = "text", @for = "timestar2" })
+                    @Html.RadioButtonFor(x => x.TimeDificulty, 1, new { @id = "timestar1", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("1 stars", new { @title = "text", @for = "timestar1" })
+                </div>
+            </div>
+            <hr />
+            <div class="row ml-1">
+                <p class=" align-content-center font-weight-bold text-primary">Software Type:&nbsp;</p> @Model.SoftwareType.Name
+            </div>
+            <div class="row ml-1">
+                <p class=" align-content-center font-weight-bold text-primary">Test Category:&nbsp;</p> @Model.Category.Name
+            </div>
+            <hr />
+            <div class="row ml-1">
+                <p class=" align-content-center font-weight-bold text-primary">Avilable to:&nbsp;</p> @Model.AvailableTo.ToShortDateString()
+            </div>
+            <div class="row ml-1">
+                <p class=" align-content-center font-weight-bold text-primary">Reward:&nbsp;</p>@Model.Reward &nbsp;<span class="icon text-primary"><i class="fas fa-coins"></i></span>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-7 mb-3 mb-sm-0">
+                    @if (Model.Evidences != null && Model.Evidences.Count > 0)
+                    {
+                        <p class=" align-content-center">Attachments:</p>
+                        <table>
+                            <tbody>
+                            @foreach (var evidence in Model.Evidences)
+                            {
+                                <tr class="border-left-primary border" id="detailTr">
+                                    <td>&nbsp&nbsp&nbsp</td>
+                                    <td border="1px" width="700" class="text-left">@evidence.RealName@evidence.Extension</td>
+                                    <td>&nbsp&nbsp&nbsp</td>
+                                    <td border="1px" class="text-center">@evidence.Attached.ToShortDateString()</td>
+                                    <td>&nbsp&nbsp&nbsp</td>
+                                    <td border="1px" class="text-center">
+                                        <a href="@Path.Combine("/Uploads", evidence.Name + evidence.Extension)" class="btn btn-primary btn-user btn-block" download="@evidence.RealName@evidence.Extension">
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-download"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+            <br/>
+            <div class=" row">
+                <div class="col-sm-7 mb-3 mb-sm-0">
+                    <p class=" align-content-center">Description:</p>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p>
+                                @Html.Raw(Model.Description)
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class=" row">
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                    @if(Request.UrlReferrer != null)
+                    {
+                        <a class="btn btn-primary btn-user btn-block" onclick="history.go(-1); return false;" href="#">Back</a><br />
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("TesterTests")" class="btn btn-primary btn-user btn-block">Back</a>
+                    }
+                </div>
+                @{
+                    switch (ViewBag.Takened)
+                    {
+                        case TestsStatus.Takened:
+                            <div class="col-sm-2 mb-3 mb-sm-0">
+                                @Html.ActionLink("Resolve test", "ResolveTest", new { testGuid = Model.Id }, new { @class = "btn btn-danger btn-user btn-block" })
+                            </div>
+                            break;
+                        case TestsStatus.Finished:
+                            <div class="col-sm-2 mb-3 mb-sm-0">
+                                @Html.ActionLink("Add Review", "AddReview", new { testsGuid = ViewBag.TestsGuid.Id }, new { @class = "btn btn-info btn-user btn-block" })
+                            </div>
+                            break;
+                        case TestsStatus.Reviewed:
+                            <div class="col-sm-2 mb-3 mb-sm-0">
+                                <div class="btn btn-secondary btn-user btn-block disabled">Reviewed</div>
+                            </div>
+                            break;
+                        default:
+                            <div class="col-sm-2 mb-3 mb-sm-0">
+                                @Html.ActionLink("Take test", "TakeTestFromDetails", new { testGuid = Model.Id }, new { @class = "btn btn-success btn-user btn-block" })
+                            </div>
+                            break;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    
+    @if (Model.Reviews != null && Model.Reviews.Count > 0)
+    {
+        <h3 class="h4 mb-2 text-gray-800">Reviews</h3>
+
+        foreach (var review in Model.Reviews.OrderByDescending(x => x.Created))
+        {
+            <div class="card shadow mb-2">
+                <div class="card-body">
+                    <div class="row col-sm-6">
+                        <img class="img-review rounded-circle" src="http://www.gravatar.com/avatar.php?gravatar_id=@Helpers.CalculateMd5Hash(review.Creator.Email).ToLower()?d=retro"><img />
+                        <div class="ml-3 align-content-center align-self-center font-weight-bold text-primary">@review.Creator.UserName</div>
+                    </div>
+                    <hr/>
+                    <div class="row col-sm-6">
+                        <p class=" align-content-center font-weight-bold text-primary">Rating:</p>
+                            <div class="col-md-6">
+                                @{
+                                    for (var i = 0; i < review.Rating; i++)
+                                    {
+                                        <span class="icon text-primary"><i class="fas fa-star"></i></span>
+                                    }
+                                    for (var i = 0; i < 5 - review.Rating; i++)
+                                    {
+                                        <span class="icon text-primary"><i class="far fa-star"></i></span>
+                                    }
+                                }
+                            </div>
+                    </div>
+                    <div class="card mb-0">
+                        <div class="card-body pt-1 pb-1">
+                            <p>
+                                @Html.Raw(review.Content)
+                            </p>
+                        </div>
+                    </div>
+                    <div class=" mt-2 d-flex justify-content-end pr-0 mr-0">
+                        <p class=" align-content-center text-xs text-secondary mb-0">Reviewed at @review.Created.ToShortDateString()</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>

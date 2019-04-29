@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A31B074A-BF93-423A-A10E-63CB561F3F0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TestCrowd.DataAccess</RootNamespace>
+    <AssemblyName>TestCrowd.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=2.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.2.1.2\lib\net461\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.2.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.2.4\lib\net461\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interface\IAddress.cs" />
+    <Compile Include="Interface\IAdmin.cs" />
+    <Compile Include="Interface\ICompany.cs" />
+    <Compile Include="Interface\Disputes\IDispute.cs" />
+    <Compile Include="Interface\Disputes\IDisputeMessage.cs" />
+    <Compile Include="Interface\ICountry.cs" />
+    <Compile Include="Interface\IEntity.cs" />
+    <Compile Include="Interface\Evidences\IEvidence.cs" />
+    <Compile Include="Interface\Repository\Disputes\IDisputeMessageRepository.cs" />
+    <Compile Include="Interface\Repository\Disputes\IDisputeRepository.cs" />
+    <Compile Include="Interface\Repository\Evidences\IEvidenceRepository.cs" />
+    <Compile Include="Interface\Repository\IAddressRepository.cs" />
+    <Compile Include="Interface\Repository\IApplicationRoleRepository.cs" />
+    <Compile Include="Interface\Repository\IApplicationUserRepository.cs" />
+    <Compile Include="Interface\Repository\ICountryRepository.cs" />
+    <Compile Include="Interface\Repository\IRepositoryBase.cs" />
+    <Compile Include="Interface\Repository\Reviews\IReviewRepository.cs" />
+    <Compile Include="Interface\Repository\Tests\ISoftwareTypeRepository.cs" />
+    <Compile Include="Interface\Repository\Tests\ITestCaseRepository.cs" />
+    <Compile Include="Interface\Repository\Tests\ITestCategoryRepository.cs" />
+    <Compile Include="Interface\Repository\Tests\ITestGroupRepository.cs" />
+    <Compile Include="Interface\Repository\Tests\ITestGroupsRepository.cs" />
+    <Compile Include="Interface\Repository\Tests\ITestsRepository.cs" />
+    <Compile Include="Interface\Repository\Tests\ITestStatusRepository.cs" />
+    <Compile Include="Interface\Reviews\IReview.cs" />
+    <Compile Include="Interface\IApplicationRole.cs" />
+    <Compile Include="Interface\IApplicationUser.cs" />
+    <Compile Include="Interface\ITester.cs" />
+    <Compile Include="Interface\Tests\ISoftwareType.cs" />
+    <Compile Include="Interface\Tests\ITestCase.cs" />
+    <Compile Include="Interface\Tests\ITestCategory.cs" />
+    <Compile Include="Interface\Tests\ITestGroup.cs" />
+    <Compile Include="Interface\Tests\ITestGroups.cs" />
+    <Compile Include="Interface\Tests\ITests.cs" />
+    <Compile Include="Interface\Tests\ITestStatus.cs" />
+    <Compile Include="Mappings\AddressMap.cs" />
+    <Compile Include="Mappings\AdminMap.cs" />
+    <Compile Include="Mappings\ApplicationUserMap.cs" />
+    <Compile Include="Mappings\ApplicationRoleMap.cs" />
+    <Compile Include="Mappings\CompanyMap.cs" />
+    <Compile Include="Mappings\CountryMap.cs" />
+    <Compile Include="Mappings\Disputes\DisputeMap.cs" />
+    <Compile Include="Mappings\Disputes\DisputeMessageMap.cs" />
+    <Compile Include="Mappings\Evidences\EvidenceMap.cs" />
+    <Compile Include="Mappings\Reviews\ReviewMap.cs" />
+    <Compile Include="Mappings\TesterMap.cs" />
+    <Compile Include="Mappings\Tests\SoftwareTypeMap.cs" />
+    <Compile Include="Mappings\Tests\TestCaseMap.cs" />
+    <Compile Include="Mappings\Tests\TestCategoryMap.cs" />
+    <Compile Include="Mappings\Tests\TestGroupMap.cs" />
+    <Compile Include="Mappings\Tests\TestGroupsMap.cs" />
+    <Compile Include="Mappings\Tests\TestsMap.cs" />
+    <Compile Include="Mappings\Tests\TestStatusMap.cs" />
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\Admin.cs" />
+    <Compile Include="Model\Company.cs" />
+    <Compile Include="Model\Country.cs" />
+    <Compile Include="Model\Disputes\Dispute.cs" />
+    <Compile Include="Model\Disputes\DisputeMessage.cs" />
+    <Compile Include="Model\Evidences\Evidence.cs" />
+    <Compile Include="Model\Reviews\Review.cs" />
+    <Compile Include="Model\ApplicationRole.cs" />
+    <Compile Include="Model\ApplicationUser.cs" />
+    <Compile Include="Model\Tester.cs" />
+    <Compile Include="Model\Tests\SoftwareType.cs" />
+    <Compile Include="Model\Tests\TestCase.cs" />
+    <Compile Include="Model\Tests\TestCategory.cs" />
+    <Compile Include="Model\Tests\TestGroup.cs" />
+    <Compile Include="Model\Tests\TestGroups.cs" />
+    <Compile Include="Model\Tests\Tests.cs" />
+    <Compile Include="Model\Tests\TestStatus.cs" />
+    <Compile Include="NHibernateHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AddressRepository.cs" />
+    <Compile Include="Repository\ApplicationRoleRepository.cs" />
+    <Compile Include="Repository\ApplicationUserRepository.cs" />
+    <Compile Include="Repository\CountryRepository.cs" />
+    <Compile Include="Repository\Disputes\DisputeMessageRepository.cs" />
+    <Compile Include="Repository\Disputes\DisputeRepository.cs" />
+    <Compile Include="Repository\Evidences\EvidenceRepository.cs" />
+    <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="Repository\Reviews\ReviewRepository.cs" />
+    <Compile Include="Repository\Tests\SoftwareTypeRepository.cs" />
+    <Compile Include="Repository\Tests\TestCaseRepository.cs" />
+    <Compile Include="Repository\Tests\TestCategoryRepository.cs" />
+    <Compile Include="Repository\Tests\TestGroupRepository.cs" />
+    <Compile Include="Repository\Tests\TestGroupsRepository.cs" />
+    <Compile Include="Repository\Tests\TestsRepository.cs" />
+    <Compile Include="Repository\Tests\TestStatusRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

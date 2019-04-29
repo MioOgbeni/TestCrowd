@@ -1,0 +1,226 @@
+﻿@using TestCrowd.DataAccess.Model
+@model IList<TestCrowd.DataAccess.Model.Tests.SoftwareType>
+
+@{
+    ViewBag.Title = "Software types";
+}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Software types</h1>
+    <p class="mb-4">Here you can view and manage your software types.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body border-bottom-primary">
+            <a href="@Url.Action("CreateSoftwareType")" class="btn btn-primary" id="addButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+            </a>
+            <a href="#" class="btn btn-primary" id="editButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-pen"></i>
+                </span>
+            </a>
+            <a href="#" class="btn btn-primary" id="validToggleButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-check"></i>
+                </span>
+            </a>
+            <button href="#" class="btn btn-danger" id="deleteButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
+            </button>
+        </div>
+
+        @if (TempData["error"] != null)
+        {
+            <br />
+            <div class=" alert card border-bottom-danger shadow h-50 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (TempData["success"] != null)
+        {
+            <br />
+            <div class=" alert card border-bottom-success shadow h-50 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Success</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["success"]</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-circle fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        if (!$.fn.DataTable.isDataTable('#dataTable')) {
+            var selected = [];
+            var table = $('#dataTable').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: {
+                    url: "@Url.Action("SoftwareTypesDataTable")",
+                    type: 'POST'
+                },
+                language: {
+                    search: "",
+                    searchPlaceholder: "Search by name..."
+                },
+                columns: [
+                    {
+                        name: "Name",
+                        data: "name",
+                        title: "Name",
+                        className: "dt-body-center text-center",
+                        sortable: true,
+                        searchable: true
+                    },
+                    {
+                        name: "Description",
+                        data: "description",
+                        title: "Description",
+                        sortable: true,
+                        searchable: false
+                    },
+                    {
+                        name: "Valid",
+                        data: "valid",
+                        title: "Valid",
+                        className: "dt-body-center text-center",
+                        sortable: true,
+                        searchable: false,
+                        className: "dt-body-center text-center",
+                        render: function (data, type, row) {
+                            var random = Math.floor(Math.random() * 10000);
+                            if (data === true) {
+                                return '<div class="custom-control custom-checkbox small">' +
+                                            '<input type="checkbox" class="custom-control-input" id="customCheck' + random +'" name="remember" value="true" onclick="return false;" checked>' +
+                                            '<label class="custom-control-label" for="customCheck' + random +'" onclick="return false;"></label>' +
+                                        '</div>';
+                            } else {
+                                return '<div class="custom-control custom-checkbox small">' +
+                                            '<input type="checkbox" class="custom-control-input" id="customCheck' + random +'" name="remember" value="true" onclick="return false;">' +
+                                            '<label class="custom-control-label" for="customCheck' + random +'" onclick="return false;"></label>' +
+                                        '</div>';
+                            }
+                        }
+                    },
+                    {
+                        name: "Created",
+                        data: "created",
+                        title: "Created",
+                        className: "dt-body-center text-center",
+                        sortable: true,
+                        searchable: false,
+                        render: function (data, type, row) {
+                            var dateSplit = data.split('-');
+                            var dateSplit2 = dateSplit[2].split('T');
+                            return dateSplit2[0] + '-' + dateSplit[1] + '-' + dateSplit[0];
+                        }
+                    },
+                    {
+                        name: "LastChange",
+                        data: "lastChange",
+                        title: "Last Change",
+                        className: "dt-body-center text-center",
+                        sortable: true,
+                        searchable: false,
+                        render: function ( data, type, row ) {
+                            var dateSplit = data.split('-');
+                            var dateSplit2 = dateSplit[2].split('T');
+                            return dateSplit2[0] + '-' + dateSplit[1] + '-' + dateSplit[0];
+                        }
+                    },
+                    {
+                        name: "ChangedBy",
+                        data: "changedByName",
+                        title: "Changed By",
+                        className: "dt-body-center text-center",
+                        sortable: true,
+                        searchable: false
+                    }
+                ],
+                rowCallback: function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }
+            });
+
+            $('#dataTable tbody').on('click', 'tr', function () {
+                var id = this.id;
+                var index = $.inArray(id, selected);
+
+                if ( index === -1 ) {
+                    selected.push( id );
+                } else {
+                    selected.splice( index, 1 );
+                }
+
+                $(this).toggleClass('selected');
+            });
+
+            $('#deleteButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        var object = table.rows('.selected').data().toArray();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("DeleteSoftwareType")",
+                            data: { rows: object }
+                        });
+                        window.setTimeout(function () { window.location.reload(); }, 300);
+                    }
+                });
+
+            $('#editButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        var object = table.rows('.selected').data().toArray();
+                        var url = "@Url.Action("EditSoftwareType")" + "?id=" + object[0].id;
+                        window.setTimeout(function () { window.location.href = url; }, 300);
+                    }
+                });
+
+            $('#validToggleButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        var object = table.rows('.selected').data().toArray();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("ToggleValidSoftwareType")",
+                            data: { rows: object }
+                        });
+                        window.setTimeout(function () { window.location.reload(); }, 300);
+                    }
+                });
+        }
+    });
+</script>

@@ -1,0 +1,270 @@
+﻿@using TestCrowd.DataAccess.Model
+@model IList<TestCrowd.DataAccess.Model.Tests.TestCase>
+
+@{
+    ViewBag.Title = "Tests";
+}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Your test cases</h1>
+    <p class="mb-4">Here you can view and manage your test cases.</p>
+
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body border-bottom-primary">
+            <a href="@Url.Action("CreateTestCase")" class="btn btn-primary" id="addButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-plus"></i>
+                </span>
+            </a>
+            <a href="#" class="btn btn-primary" id="editButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-pen"></i>
+                </span>
+            </a>
+            <a href="#" class="btn btn-primary" id="detailButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-file-invoice"></i>
+                </span>
+            </a>
+            <button href="#" class="btn btn-danger" id="modalButton">
+                <span class="icon text-white-50">
+                    <i class="fas fa-trash"></i>
+                </span>
+            </button>
+        </div>
+
+        @if (TempData["error"] != null)
+        {
+            <br />
+            <div class=" alert card border-bottom-danger shadow h-50 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (TempData["success"] != null)
+        {
+            <br />
+            <div class=" alert card border-bottom-success shadow h-50 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Success</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["success"]</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-check-circle fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Really want delete?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Do you want to delete selected test case/s?</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">No</button>
+                <button class="btn btn-primary" id="deleteButton">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        if (!$.fn.DataTable.isDataTable('#dataTable')) {
+            var selected = [];
+            var table = $('#dataTable').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: {
+                    url: "@Url.Action("CompanyTestsDataTable")",
+                    type: 'POST'
+                },
+                language: {
+                    search: "",
+                    searchPlaceholder: "Search by name..."
+                },
+                columns: [
+                    {
+                        name: "Name",
+                        data: "name",
+                        title: "Name",
+                        className: "dt-body-center text-center",
+                        sortable: true,
+                        searchable: true
+                    },
+                    {
+                        name: "SkillDificulty",
+                        data: "skillDificulty",
+                        title: "Skill Dificulty",
+                        sortable: true,
+                        searchable: false,
+                        className: "dt-body-center text-center",
+                        render: function (data, type, row) {
+                            var i;
+                            var returnHtml = '';
+                            for (i = 0; i < data; i++) {
+                                returnHtml = returnHtml + '<span class="icon text-primary"><i class="fas fa-star"></i></span>';
+                            }
+                            for (i = 0; i < 5-data; i++) {
+                                returnHtml = returnHtml + '<span class="icon text-primary"><i class="far fa-star"></i></span>';
+                            }
+                            return returnHtml;
+                        }
+                    },
+                    {
+                        name: "TimeDificulty",
+                        data: "timeDificulty",
+                        title: "Time Dificulty",
+                        sortable: true,
+                        searchable: false,
+                        className: "dt-body-center text-center",
+                        render: function (data, type, row) {
+                            var i;
+                            var returnHtml = '';
+                            for (i = 0; i < data; i++) {
+                                returnHtml = returnHtml + '<span class="icon text-primary"><i class="fas fa-star"></i></span>';
+                            }
+                            for (i = 0; i < 5 - data; i++) {
+                                returnHtml = returnHtml + '<span class="icon text-primary"><i class="far fa-star"></i></span>';
+                            }
+                            return returnHtml;
+                        }
+                    },
+                    {
+                        name: "Reward",
+                        data: "reward",
+                        title: "Reward",
+                        sortable: true,
+                        searchable: false,
+                        className: "dt-body-center text-center",
+                        render: function (data, type, row) {
+                            return data + ' <span class="icon text-primary"><i class="fas fa-coins"></i></span>';
+                        }
+                    },
+                    {
+                        name: "Rating",
+                        data: "rating",
+                        title: "Rating",
+                        sortable: true,
+                        searchable: false,
+                        className: "dt-body-center text-center",
+                        render: function (data, type, row) {
+                            return data + ' <span class="icon text-primary"><i class="fas fa-chart-line"></i></span>';
+                        }
+                    },
+                    {
+                        name: "Created",
+                        data: "created",
+                        title: "Created",
+                        sortable: true,
+                        searchable: false,
+                        className: "dt-body-center text-center",
+                        render: function (data, type, row) {
+                            var dateSplit = data.split('-');
+                            var dateSplit2 = dateSplit[2].split('T');
+                            return dateSplit2[0] + '-' + dateSplit[1] + '-' + dateSplit[0];
+                        }
+                    },
+                    {
+                        name: "AvailableTo",
+                        data: "availableTo",
+                        title: "Available To",
+                        sortable: true,
+                        searchable: false,
+                        className: "dt-body-center text-center",
+                        render: function (data, type, row) {
+                            var dateSplit = data.split('-');
+                            var dateSplit2 = dateSplit[2].split('T');
+                            return dateSplit2[0] + '-' + dateSplit[1] + '-' + dateSplit[0];
+                        }
+                    }
+                ],
+                rowCallback: function( row, data ) {
+                    if ( $.inArray(data.DT_RowId, selected) !== -1 ) {
+                        $(row).addClass('selected');
+                    }
+                }
+            });
+
+            $('#dataTable tbody').on('click', 'tr', function () {
+                var id = this.id;
+                var index = $.inArray(id, selected);
+
+                if ( index === -1 ) {
+                    selected.push( id );
+                } else {
+                    selected.splice( index, 1 );
+                }
+
+                $(this).toggleClass('selected');
+            });
+
+            $('#modalButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        $('#deleteModal').modal('toggle');
+                    }
+                });
+
+            $('#deleteButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        var object = table.rows('.selected').data().toArray();
+                        $.ajax({
+                            type: "POST",
+                            url: "@Url.Action("DeleteTestCase")",
+                            data: { rows: object }
+                        });
+                        window.setTimeout(function() { window.location.reload(); }, 300);
+                    }
+                });
+
+            $('#editButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        var object = table.rows('.selected').data().toArray();
+                        var url = "@Url.Action("EditTestCase")" + "?id=" + object[0].id;
+                        window.setTimeout(function () { window.location.href = url; }, 300);
+                    }
+                });
+
+            $('#detailButton').on('click',
+                function (e) {
+                    if (table.rows('.selected').data().length > 0) {
+                        var object = table.rows('.selected').data().toArray();
+                        var url = "@Url.Action("DetailTestCaseCompany")" + "?id=" + object[0].id;
+                        window.setTimeout(function () { window.location.href = url; }, 300);
+                    }
+                });
+        }
+    });
+</script>

@@ -1,0 +1,64 @@
+﻿@model TestCrowd.DataAccess.Model.Tests.SoftwareType
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Software type - @ViewBag.Title</h1>
+    <p class="mb-4">Here you can edit Software types!</p>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            @using (Html.BeginForm("UpdateSoftwareType", "Administration", FormMethod.Post))
+            {
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.Created)
+                @Html.HiddenFor(x => x.LastChange)
+                @Html.HiddenFor(x => x.ChangedBy)
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control form-control-user", @placeholder = "Name" })
+                    <p class="small">@Html.ValidationMessageFor(x => x.Name)</p>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Description, new { @class = "form-control form-control-user", @placeholder = "Short description" })
+                    <p class="small">@Html.ValidationMessageFor(x => x.Description)</p>
+                </div>
+                <div class="custom-control custom-checkbox small">
+                    @Html.CheckBoxFor(x => x.Valid, new { @checked = "checked", @class = "custom-control-input", @id = "customCheck" })
+                    <label class="custom-control-label" for="customCheck">Is type valid?</label>
+                </div>
+                <br />
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <a href="@Url.Action("SoftwareTypes")" class="btn btn-primary btn-user btn-block">Back</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Edit type</button>
+                    </div>
+                </div>
+            }
+
+            @if (TempData["error"] != null)
+            {
+                <br />
+                <div class=" alert card border-left-danger shadow h-50 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

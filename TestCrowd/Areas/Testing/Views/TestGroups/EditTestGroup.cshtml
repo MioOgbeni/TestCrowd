@@ -1,0 +1,160 @@
+﻿@using TestCrowd.DataAccess.Model.Tests
+@model TestCrowd.DataAccess.Model.Tests.TestGroup
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+<link href="@Url.Content("~/Content/css/select2.css")" rel="stylesheet" />
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Test group - @ViewBag.Title</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            @if (TempData["error"] != null)
+            {
+                <br />
+                <div class=" alert card border-left-danger shadow h-50 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            @using (Html.BeginForm("UpdateTestGroup", "TestGroups", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(x => x.Id)
+
+                <div class="form-group row">
+                    <div class="col-sm-3">
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control form-control-user", @placeholder = "Test group name" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.Name)</p>
+                    </div>
+                </div>
+
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Available to:</p>
+                    <div class="form-group col-sm-4">
+                        @Html.TextBoxFor(x => x.AvailableTo, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.AvailableTo)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-7 mb-3 mb-sm-0">
+                        @if (Model.TestCases != null && Model.TestCases.Count > 0)
+                        {
+                        <p class=" align-content-center">Current test cases:</p>
+                            <table>
+                                <tbody>
+                                    <tr class="">
+                                        <th>Name</th>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <th>Available to</th>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                    </tr>
+                                @foreach (var testCase in Model.TestCases)
+                                {
+                                    <tr class="">
+                                        <td border="1px" width="700" class="text-left">@testCase.Name</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" class="text-center">@testCase.AvailableTo.ToShortDateString()</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" class="text-center">
+                                            <a href="@Url.Action("DeleteAttachedTestCase", new {id = Model.Id, testCaseId = testCase.Id})" class="btn btn-primary btn-user btn-block">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-times"></i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-3 mb-3 mb-sm-0">
+                        <p class="align-content-center mb-0">Test cases:</p>
+                        <p class="align-content-center text-xs">(Available To must be equal or greater than availability of latest test case!)</p>
+                        <input type="hidden" id="testCasesVal" name="data" />
+                        <select class="mySelect2 form-control form-control-user"></select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 mb-3 mb-sm-0">
+                        <p class="align-content-center mb-0">Reward multiplier:</p>
+                        <p class="align-content-center text-xs">(applied to each test case)</p>
+                        <div class="input-group">
+                            @Html.TextBoxFor(x => x.RewardMultiplier, new { @Value = (int)(Model.RewardMultiplier*100)-100, @class = "form-control form-control-user", @placeholder = "Enter value (0-100)", @type = "number", @min = "0", @max = "100", @step = "1", @id = "myPercent" })
+                            <div class="input-group-append">
+                                <div class="btn bg-primary text-white">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="small">@Html.ValidationMessageFor(x => x.RewardMultiplier)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-2 mb-3 mb-sm-0">
+                        <a href="@Url.Action("CompanyTestGroups")" class="btn btn-primary btn-user btn-block">Back</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Edit test group</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/select2.min.js")"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#myPercent').keypress(function (field) {
+            field.preventDefault();
+        });
+
+        $(".mySelect2").select2({
+            placeholder: "Select test cases",
+            allowClear: true,
+            multiple: true,
+            ajax: {
+                url: "@Url.Action("GetTestCases", "TestGroups")",
+                datatype: 'json',
+                delay: 250,
+                multiple: true,
+                data: function(params) {
+                    return {
+                        searchTerm: params.term
+                    };
+                },
+                processResults: function(data, params) {
+                    return {
+                        results: data
+                    };
+                }
+            }
+        });
+
+        $(".mySelect2").on("change",
+            function() {
+                var testCaseId = $(this).val();
+                $("#testCasesVal").val(testCaseId);
+            });
+    });
+
+</script>

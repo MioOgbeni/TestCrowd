@@ -1,0 +1,68 @@
+﻿@model TestCrowd.DataAccess.Model.Admin
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Admins - @ViewBag.Title</h1>
+    <p class="mb-4">Here you can edit admin account!</p>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            @using (Html.BeginForm("Update", "Administration", FormMethod.Post))
+            {
+                @Html.HiddenFor(x => x.Id)
+                @Html.HiddenFor(x => x.PasswordHash)
+
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.UserName, new { @class = "form-control form-control-user", @placeholder = "User Name" })
+                    <p class="small">@Html.ValidationMessageFor(x => x.UserName)</p>
+                </div>
+                <div class="form-group">
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control form-control-user", @placeholder = "Email Address" })
+                    <p class="small">@Html.ValidationMessageFor(x => x.Email)</p>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control form-control-user", @placeholder = "First Name" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.FirstName)</p>
+                    </div>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(x => x.LastName, new { @class = "form-control form-control-user", @placeholder = "Last Name" })
+                        <p class="small">@Html.ValidationMessageFor(x => x.LastName)</p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <a href="@Url.Action("Admins")" class="btn btn-primary btn-user btn-block">Back</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="submit" class="btn btn-primary btn-user btn-block">Edit admin</button>
+                    </div>
+                </div>
+            }
+
+            @if (TempData["error"] != null)
+            {
+                <br />
+                <div class=" alert card border-left-danger shadow h-50 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

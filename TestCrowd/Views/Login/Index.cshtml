@@ -1,0 +1,138 @@
+﻿@model TestCrowd.DataAccess.Model.ApplicationUser
+@{
+
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title</title>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="@Url.Content("~/NewBiz/img/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Url.Content("~/NewBiz/img/favicon-32x32.png")">
+    <link rel="icon" type="image/png" sizes="16x16" href="@Url.Content("~/NewBiz/img/favicon-16x16.png")">
+    <link rel="manifest" href="@Url.Content("~/NewBiz/img/site.webmanifest")">
+
+    <!-- Custom fonts for this template-->
+    <link href="@Url.Content("~/Areas/Testing/startbootstrap-sb-admin-2-gh-pages/vendor/fontawesome-free/css/all.min.css")" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="@Url.Content("~/Areas/Testing/startbootstrap-sb-admin-2-gh-pages/css/sb-admin-2.min.css")" rel="stylesheet">
+</head>
+<body class="bg-gradient-primary">
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    </div>
+                                    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "user" }))
+                                    {
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control form-control-user", @placeholder = "Account Name", autofocus="true", @type="text" })
+                                            <p class="small">@Html.ValidationMessageFor(x => x.UserName)</p>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control form-control-user", @placeholder = "Email Address", @type="email" })
+                                            <p class="small">@Html.ValidationMessageFor(x => x.Email)</p>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(x => x.PasswordHash, new { @class = "form-control form-control-user", @placeholder = "Password", @type = "password" })
+                                            <p class="small">@Html.ValidationMessageFor(x => x.PasswordHash)</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck" name="remember" value="true">
+                                                <label class="custom-control-label" for="customCheck">Remember Me</label>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+                                    }
+                                    @if (TempData["error"] != null)
+                                    {
+                                        <br />
+                                        <div class=" alert card border-left-danger shadow h-50 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Error</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["error"]</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-exclamation-circle fa-2x text-danger"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (TempData["success"] != null)
+                                    {
+                                        <br />
+                                        <div class=" alert card border-left-success shadow h-50 py-2">
+                                            <div class="card-body">
+                                                <div class="row no-gutters align-items-center">
+                                                    <div class="col mr-2">
+                                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Success</div>
+                                                        <div class="h5 mb-0 font-weight-bold text-gray-800">@TempData["success"]</div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <i class="fas fa-check-circle fa-2x text-success"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <hr>
+                                    <div class="text-center">
+                                        <a class="small" href="#">Forgot Password?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        Create <a class="small" href="@Url.Action("Index", "Registration", new {id = "tester"})">tester account</a> or <a class="small" href="@Url.Action("Index", "Registration", new {id = "company"})">company account</a>!
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="@Url.Action("Index", "Public")">Back to main site</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="@Url.Content("~/Areas/Testing/startbootstrap-sb-admin-2-gh-pages/vendor/jquery/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Areas/Testing/startbootstrap-sb-admin-2-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js")"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="@Url.Content("~/Areas/Testing/startbootstrap-sb-admin-2-gh-pages/vendor/jquery-easing/jquery.easing.min.js")"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="@Url.Content("~/Areas/Testing/startbootstrap-sb-admin-2-gh-pages/js/sb-admin-2.min.js")"></script>
+    <script>
+        $(document).ready(function () {
+            // show the alert
+            setTimeout(function () {
+                $(".alert").fadeTo(750, 0).slideUp(0, function () {
+                    $(this).remove();
+                });
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
+
+

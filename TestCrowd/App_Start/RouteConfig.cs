@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace TestCrowd
@@ -16,7 +12,15 @@ namespace TestCrowd
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Public", action = "Index", id = UrlParameter.Optional },
+                namespaces: new []{"TestCrowd.Controllers"}
+            );
+
+            routes.MapRoute(
+                name: "Profile",
+                url: "{controller}/{action}/{role}/{username}",
+                defaults: new { controller = "Public", action = "Index", role = UrlParameter.Optional, username = UrlParameter.Optional },
+                namespaces: new[] { "TestCrowd.Areas.Testing.Controllers" }
             );
         }
     }

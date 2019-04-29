@@ -1,0 +1,165 @@
+﻿@using TestCrowd.Class
+@model TestCrowd.DataAccess.Model.Tests.TestCase
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">TestCase - @Model.Name</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="form-group row col-sm-6">
+                <p class=" align-content-center">Skill difficulty:</p>
+                <div class="ratingDetail">
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 5, new { @id = "skillstar5", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("5 stars", new { @title = "text", @for = "skillstar5" })
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 4, new { @id = "skillstar4", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("4 stars", new { @title = "text", @for = "skillstar4" })
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 3, new { @id = "skillstar3", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("3 stars", new { @title = "text", @for = "skillstar3" })
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 2, new { @id = "skillstar2", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("2 stars", new { @title = "text", @for = "skillstar2" })
+                    @Html.RadioButtonFor(x => x.SkillDificulty, 1, new { @id = "skillstar1", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("1 stars", new { @title = "text", @for = "skillstar1" })
+                </div>
+            </div>
+
+            <div class="form-group row col-sm-6">
+                <p class=" align-content-center">Time difficulty:</p>
+                <div class="ratingDetail">
+                    @Html.Label("5 stars", new { @title = "text", @for = "timestar5" })
+                    @Html.RadioButtonFor(x => x.TimeDificulty, 4, new { @id = "timestar4", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("4 stars", new { @title = "text", @for = "timestar4" })
+                    @Html.RadioButtonFor(x => x.TimeDificulty, 3, new { @id = "timestar3", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("3 stars", new { @title = "text", @for = "timestar3" })
+                    @Html.RadioButtonFor(x => x.TimeDificulty, 2, new { @id = "timestar2", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("2 stars", new { @title = "text", @for = "timestar2" })
+                    @Html.RadioButtonFor(x => x.TimeDificulty, 1, new { @id = "timestar1", @name = "ratingDetail", @disabled = "true" })
+                    @Html.Label("1 stars", new { @title = "text", @for = "timestar1" })
+                </div>
+            </div>
+
+            <div class="form-group row col-sm-6">
+                <p class=" align-content-center">Avilable to:</p>
+                <div class="form-group col-sm-4">
+                    @Html.TextBoxFor(x => x.AvailableTo, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control", @readonly = "true" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                    <p class=" align-content-center">Reward:</p>
+                    @Html.TextBoxFor(x => x.Reward, new { @class = "form-control form-control-user", @placeholder = "Reward", @readonly = "true" })
+                </div>
+                <div class="col-sm-2">
+                    <p class=" align-content-center">Software Type:</p>
+                    @Html.TextBoxFor(x => x.SoftwareType.Name, new { @class = "form-control form-control-user", @readonly = "true" })
+                </div>
+                <div class="col-sm-2">
+                    <p class=" align-content-center">Test Category:</p>
+                    @Html.TextBoxFor(x => x.Category.Name, new { @class = "form-control form-control-user", @readonly = "true" })
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-7 mb-3 mb-sm-0">
+                    @if (Model.Evidences != null && Model.Evidences.Count > 0)
+                    {
+                        <p class=" align-content-center">Attachments:</p>
+                        <table>
+                            <tbody>
+                                @foreach (var evidence in Model.Evidences)
+                                {
+                                    <tr class="border-left-primary border" id="detailTr">
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" width="700" class="text-left">@evidence.RealName@evidence.Extension</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" class="text-center">@evidence.Attached.ToShortDateString()</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" class="text-center">
+                                            <a href="@Path.Combine("/Uploads", evidence.Name + evidence.Extension)" class="btn btn-primary btn-user btn-block" download="@evidence.RealName@evidence.Extension">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-download"></i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-7 mb-3 mb-sm-0">
+                    <p class=" align-content-center">Description:</p>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <p>
+                                @Html.Raw(Model.Description)
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2 mb-3 mb-sm-0">
+                    @if (Request.UrlReferrer != null)
+                    {
+                        <a class="btn btn-primary btn-user btn-block" onclick="history.go(-1); return false;" href="#">Back</a><br />
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("CompanyTests")" class="btn btn-primary btn-user btn-block">Back</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Reviews != null && Model.Reviews.Count > 0)
+    {
+        <h3 class="h4 mb-2 text-gray-800">Reviews</h3>
+
+        foreach (var review in Model.Reviews)
+        {
+            <div class="card shadow mb-2">
+                <div class="card-body">
+                    <div class="row col-sm-6">
+                        <img class="img-review rounded-circle" src="http://www.gravatar.com/avatar.php?gravatar_id=@Helpers.CalculateMd5Hash(review.Creator.Email).ToLower()?d=retro"><img />
+                        <div class="ml-3 align-content-center align-self-center font-weight-bold text-primary">@review.Creator.UserName</div>
+                    </div>
+                    <hr />
+                    <div class="row col-sm-6">
+                        <p class=" align-content-center font-weight-bold text-primary">Rating:</p>
+                        <div class="ratingDetail">
+                            @Html.RadioButtonFor(x => review.Rating, 5, new { @id = "skillstar5", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("5 stars", new { @title = "text", @for = "skillstar5" })
+                            @Html.RadioButtonFor(x => review.Rating, 4, new { @id = "skillstar4", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("4 stars", new { @title = "text", @for = "skillstar4" })
+                            @Html.RadioButtonFor(x => review.Rating, 3, new { @id = "skillstar3", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("3 stars", new { @title = "text", @for = "skillstar3" })
+                            @Html.RadioButtonFor(x => review.Rating, 2, new { @id = "skillstar2", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("2 stars", new { @title = "text", @for = "skillstar2" })
+                            @Html.RadioButtonFor(x => review.Rating, 1, new { @id = "skillstar1", @name = "ratingDetail", @disabled = "true" })
+                            @Html.Label("1 stars", new { @title = "text", @for = "skillstar1" })
+                        </div>
+                    </div>
+                    <div class="card mb-0">
+                        <div class="card-body pt-1 pb-1">
+                            <p>
+                                @Html.Raw(review.Content)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

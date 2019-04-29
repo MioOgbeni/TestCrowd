@@ -1,0 +1,85 @@
+﻿@model TestCrowd.DataAccess.Model.Company
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Profile info</h2>
+
+<div class="card-body card">
+    <div class="card-body">
+        <h4>Basic information</h4>
+        <div class="card border-left-primary mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-1-2">
+                        <p class="font-weight-bold text-primary">Company Name: </p>
+                    </div>
+                    <div class="col">
+                        @Model.CompanyName
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1-2">
+                        <p class="font-weight-bold text-primary">Email: </p>
+                    </div>
+                    <div class="col">
+                        @Model.Email
+                    </div>
+                </div>
+                <br />
+                <h5>Address</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-1-2">
+                                <p class="font-weight-bold text-primary">Street: </p>
+                            </div>
+                            <div class="col">
+                                @Model.Address.Street
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1-2">
+                                <p class="font-weight-bold text-primary">City: </p>
+                            </div>
+                            <div class="col">
+                                @Model.Address.City
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1-2">
+                                <p class="font-weight-bold text-primary">Post code: </p>
+                            </div>
+                            <div class="col">
+                                @Model.Address.PostCode
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1-2">
+                                <p class="font-weight-bold text-primary">Country: </p>
+                            </div>
+                            <div class="col">
+                                @Model.Address.Country.Name
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4>Account information</h4>
+        <div class="card border-left-primary mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-1-2">
+                        <p class="font-weight-bold text-primary">Credits on account: </p>
+                    </div>
+                    <div class="col">
+                        @Model.Credits <span class="icon text-primary"><i class="fas fa-coins"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

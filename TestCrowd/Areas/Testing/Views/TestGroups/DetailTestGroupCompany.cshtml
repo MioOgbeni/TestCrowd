@@ -1,0 +1,142 @@
+﻿@using TestCrowd.DataAccess.Model.Tests
+@model TestCrowd.DataAccess.Model.Tests.TestGroup
+@{
+                /**/
+
+                ViewBag.Title = "Detail";
+                Layout = "~/Areas/Testing/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">TestGroup - @Model.Name</h1>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Skill difficulty:</p>
+                    <div class="ratingDetail">
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 5, new { @id = "skillstar5", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("5 stars", new { @title = "text", @for = "skillstar5" })
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 4, new { @id = "skillstar4", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("4 stars", new { @title = "text", @for = "skillstar4" })
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 3, new { @id = "skillstar3", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("3 stars", new { @title = "text", @for = "skillstar3" })
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 2, new { @id = "skillstar2", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("2 stars", new { @title = "text", @for = "skillstar2" })
+                        @Html.RadioButtonFor(x => x.SkillDificulty, 1, new { @id = "skillstar1", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("1 stars", new { @title = "text", @for = "skillstar1" })
+                    </div>
+                </div>
+
+                <div class="form-group row col-sm-6">
+                    <p class=" align-content-center">Time difficulty:</p>
+                    <div class="ratingDetail">
+                        @Html.Label("5 stars", new { @title = "text", @for = "timestar5" })
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 4, new { @id = "timestar4", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("4 stars", new { @title = "text", @for = "timestar4" })
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 3, new { @id = "timestar3", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("3 stars", new { @title = "text", @for = "timestar3" })
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 2, new { @id = "timestar2", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("2 stars", new { @title = "text", @for = "timestar2" })
+                        @Html.RadioButtonFor(x => x.TimeDificulty, 1, new { @id = "timestar1", @name = "ratingDetail", @disabled = "true" })
+                        @Html.Label("1 stars", new { @title = "text", @for = "timestar1" })
+                    </div>
+                </div>
+
+            <div class="form-group row col-sm-6">
+                <p class=" align-content-center">Avilable to:</p>
+                <div class="form-group col-sm-4">
+                    @Html.TextBoxFor(x => x.AvailableTo, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control", @readonly = "true" })
+                </div>
+            </div>
+            <div class="form-group row col-sm-6">
+                <p class=" align-content-center">Reward multiplier:</p>
+                <div class="form-group col-sm-4">
+                    <div class="input-group">
+                        <input type="number" value="@Html.Raw((int)(Model.RewardMultiplier*100)-100)" readonly="true" class="form-control form-control-user" />
+                        <div class="input-group-append">
+                            <div class="btn bg-primary text-white">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="form-group row">
+                    <div class="col-auto mb-3 mb-sm-0">
+                        @if (Model.TestCases != null && Model.TestCases.Count > 0)
+                        {
+                            <p class=" align-content-center">Test cases:</p>
+                            <table>
+                                <tbody>
+                                    @foreach (var testCase in Model.TestCases)
+                                    {
+                                    <tr class="border-left-primary border" id="detailTr">
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" width="500" class="text-left">@testCase.Name</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" width="250" class="text-center">
+                                            Skill dificulty:
+                                            @{
+                                                for (var i = 0; i < testCase.SkillDificulty; i++)
+                                                {
+                                                    <span class="icon text-primary"><i class="fas fa-star"></i></span>
+                                                }
+                                                for (var i = 0; i < 5 - testCase.SkillDificulty; i++)
+                                                {
+                                                    <span class="icon text-primary"><i class="far fa-star"></i></span>
+                                                }
+                                            }
+                                        </td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" width="250" class="text-center">
+                                            Time dificulty:
+                                            @{
+                                                for (var i = 0; i < testCase.TimeDificulty; i++)
+                                                {
+                                                    <span class="icon text-primary"><i class="fas fa-star"></i></span>
+                                                }
+                                                for (var i = 0; i < 5 - testCase.TimeDificulty; i++)
+                                                {
+                                                    <span class="icon text-primary"><i class="far fa-star"></i></span>
+                                                }
+                                            }
+                                        </td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" width="200" class="text-center">Available to: @testCase.AvailableTo.ToShortDateString()</td>
+                                        <td>&nbsp&nbsp&nbsp</td>
+                                        <td border="1px" class="text-center">
+                                            <a href="@Url.Action("DetailTestCaseCompany", "Tests", new {id = testCase.Id})" class="btn btn-primary btn-user btn-block">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-share-square"></i>
+                                                </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>                
+                <div class="form-group row">
+                    <div class="col-sm-2 mb-3 mb-sm-0">
+                        @if(Request.UrlReferrer != null)
+                        {
+                            <a class="btn btn-primary btn-user btn-block" onclick="history.go(-1); return false;" href="#">Back</a><br />
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("CompanyTestGroups")" class="btn btn-primary btn-user btn-block">Back</a>
+                        }
+
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
